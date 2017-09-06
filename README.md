@@ -9,7 +9,7 @@
 sudo apt-get install texlive-full
 
 # Depois instale os pacotes para o abntex
-apt-get install texlive-publishers texlive-lang-portuguese texlive-latex-extra texlive-fonts-recommended
+sudo apt-get install texlive-publishers texlive-lang-portuguese texlive-latex-extra texlive-fonts-recommended
 
 # Baixe o abntex ou acesse http://dl.bintray.com/laurocesar/generic/abntex2.tds-1.9.6.tar.gz no navegador
 wget http://dl.bintray.com/laurocesar/generic/abntex2.tds-1.9.6.tar.gz
