@@ -24,10 +24,13 @@ sudo make install
 ## Receita para compilar
 
 ```sh
-# Instale o pdflatex
-sudo apt-get install pdflatex
+# Instale o compilador
+sudo apt-get install latexmk
 
 # Entre na pasta src e rode
-pdflatex criptografia-simetrica-des.tex
+latexmk -pdf criptografia-simetrica-des.tex
 
 ```
+
+## Bibliografia
+
