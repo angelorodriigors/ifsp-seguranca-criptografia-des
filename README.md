@@ -28,6 +28,6 @@ sudo make install
 sudo apt-get install pdflatex
 
 # Entre na pasta src e rode
-pdflatex criptografia-simetrica-des.pdf
+pdflatex criptografia-simetrica-des.tex
 
 ```
