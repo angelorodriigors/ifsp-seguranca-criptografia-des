@@ -1,7 +1,7 @@
 \documentclass[
 	% -- opções da classe memoir --
 	article,			% indica que é um artigo acadêmico
-	12pt,				% tamanho da fonte
+	11pt,				% tamanho da fonte
 	oneside,			% para impressão apenas no recto. Oposto a twoside
 	a4paper,			% tamanho do papel. 
 	% -- opções da classe abntex2 --
@@ -136,8 +136,14 @@
 % Introdução
 \section*{Introdução}
 \addcontentsline{toc}{section}{Introdução}
+\nocite{sistema-des}
+\nocite{criptografia-simetrica-assimetrica-cifragem}
 
-Introdução
+A evolução das empresas de tecnologia, trouxe o advento da informação como patrimônio, portanto, é imprescindível alocação de recursos para protegê-la.
+
+A metodologia utilizada para proteção dos dados dos sistemas de informação é a criptografia, que possui muitas implementações e algoritmos diferentes para a codificação dos dados.
+
+Durante este artigo iremos introduzir o algoritmo DES (Data Encryption Standard), amplamente conhecido e utilizado em sistemas de comunicações.
 
 % Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
 \bookmarksetup{startatroot}
