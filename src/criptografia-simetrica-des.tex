@@ -1,7 +1,7 @@
 \documentclass[
 	% -- opções da classe memoir --
 	article,			% indica que é um artigo acadêmico
-	11pt,				% tamanho da fonte
+	12pt,				% tamanho da fonte
 	oneside,			% para impressão apenas no recto. Oposto a twoside
 	a4paper,			% tamanho do papel. 
 	% -- opções da classe abntex2 --
@@ -58,7 +58,8 @@
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---
 \titulo{Criptografia Simétrica D.E.S - Data Encryption Standard}
-\autor{Angelo Rodrigo Ribeiro da Silva\thanks{angelorodriigo.rs@gmail.com} Jonatas Rosa da Silva Bonventi\thanks{jonatasbvt@yahoo.com}}
+\autor{Angelo Rodrigo Ribeiro da Silva\thanks{angelorodriigo.rs@gmail.com} Jaíne da Silva Santos\thanks{jaine.ssilva1@gmail.com}
+\\Jonatas Rosa da Silva Bonventi\thanks{jonatasbvt@yahoo.com} Dante Mesquita Neto\thanks{dantemesquitaneto@gmail.com}}
 \local{Brasil}
 \data{2017}
 
@@ -144,7 +145,7 @@ A evolução das empresas de tecnologia, trouxe o advento da informação como p
 
 A metodologia utilizada para proteção dos dados dos sistemas de informação é a criptografia, que possui muitas implementações e algoritmos diferentes para a codificação dos dados.
 
-Durante este artigo iremos introduzir o algoritmo DES (Data Encryption Standard), amplamente conhecido e utilizado em sistemas de comunicações.
+Durante este artigo iremos introduzir o algoritmo DES (Data Encryption Standard), que utiliza o modelo de criptografia simétrica, ele é amplamente conhecido e utilizado em sistemas de comunicações.
 
 \section{Criptografia Simétrica}
 
@@ -154,8 +155,39 @@ A criptografia simétrica, também conhecida como criptografia de chave privada,
 
 \section{Data Encryption Standard}
 
+O DES (Data Encryption Standard) é um algoritmo simétrico que utiliza um tamanho de 64 bits. Para cada 64 bits de texto plano, gera 64 bits de texto criptografado, o faz, dividindo a mensagem em vários blocos, a preparando para o algoritmo de criptografia.
+
+Sua chave possui um tamanho de 64 bits, sendo utilizados somente 56, pois 8 bits são reservados para paridade.
+
+Na cifra DES, utilizamos para a criptografia uma série de permutações e substituições. Cada bloco do DES, utiliza uma substituição e uma permutação, o DES possui 16 destes blocos. Utilizando apenas operações aritméticas e lógicas, facilitou muito seu uso em hardware.
+
+Atualmente, o DES foi substituido, entrando em seu lugar o Advanced Encryption Standard (AES), ele foi trocado principalmente pela sua insegurança ao utilizar uma chave de apenas 56 bits. O DES já conseguiu, através de alguns algoritmos ter sua chave quebrada em menos de 24 horas.
 
 
+\subsection{Pré Criptografia Opcional}
+
+Para realizar os ciclos de criptografia do DES, é muito recomendado que convertamos os dados para números e então binários, para que possamos melhorar tanto a segurança quanto a performance da cifra, a baixo temos um exemplo:
+
+\begin{table}[h]
+\centering
+\caption{Tabela de substituição}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+A  & B  & C  & D  & E  & F  & G  & H  & I  & J  & K  & L  & M  & N  & O  & P  & Q  & R  & S  \\ \hline
+15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 & 32 & 33 \\ \hline
+\end{tabular}
+\\
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+T  & U  & V  & X  & Y  & Z  & 1  & 2  & 3  & 4  & 5  & 6  & 7  & 8  & 9  & - \\ \hline
+34 & 35 & 36 & 37 & 38 & 39 & 40 & 41 & 42 & 43 & 44 & 45 & 46 & 47 & 48 & 49 \\ \hline
+\end{tabular}
+\end{table}
+
+Utilizando a tabela, subtituímos as letras pelos números, ignorando os acentos e letras maíusculas. O número 49 irá ser utilizado para substituir os espaços.
+
+O uso de 2 digitos para representar cada letra, evita a ambiguidade. Por exemplo, se a letra A fosse representada pelo número 3 e a letra B pelo número 4, logo "AB" seria representado por 34, porém o número 7 também seria representado por 34.
 
 % Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
 \bookmarksetup{startatroot}
