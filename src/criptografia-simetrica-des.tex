@@ -3,7 +3,7 @@
 	article,			% indica que é um artigo acadêmico
 	12pt,				% tamanho da fonte
 	oneside,			% para impressão apenas no recto. Oposto a twoside
-	a4paper,			% tamanho do papel. 
+	a4paper,			% tamanho do papel.
 	% -- opções da classe abntex2 --
 	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
 	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
@@ -29,7 +29,7 @@
 \usepackage{graphicx}			% Inclusão de gráficos
 \usepackage{microtype} 			% para melhorias de justificação
 % ---
-		
+
 % ---
 % Pacotes de citações
 % ---
@@ -72,11 +72,11 @@
 \makeatletter
 \hypersetup{
      	%pagebackref=true,
-		pdftitle={\@title}, 
+		pdftitle={\@title},
 		pdfauthor={\@author},
     	pdfsubject={Criptografia Simétrica D.E.S - Data Encryption Standard},
 	    pdfcreator={LaTeX with abnTeX2},
-		pdfkeywords={des}{Data Encryption Standard}{criptografia}{segurança da informação}{ifsp}, 
+		pdfkeywords={des}{Data Encryption Standard}{criptografia}{segurança da informação}{ifsp},
 		colorlinks=true,       		% false: boxed links; true: colored links
     	linkcolor=blue,          	% color of internal links
     	citecolor=blue,        		% color of links to bibliography
@@ -95,9 +95,9 @@
 \setulmarginsandblock{3cm}{3cm}{*}
 \checkandfixthelayout
 
-% --- 
-% Espaçamentos entre linhas e parágrafos 
-% --- 
+% ---
+% Espaçamentos entre linhas e parágrafos
+% ---
 
 % O tamanho do parágrafo é dado por:
 \setlength{\parindent}{1.3cm}
@@ -124,9 +124,9 @@
 % resumo em português
 \begin{resumoumacoluna}
  Resumo de uma coluna.
- 
+
  \vspace{\onelineskip}
- 
+
  \noindent
  \textbf{Palavras-chave}: des. Data Encryption Standard. criptografia. ifsp.
 \end{resumoumacoluna}
@@ -177,7 +177,7 @@ Para realizar os ciclos de criptografia do DES, é muito recomendado que convert
 A  & B  & C  & D  & E  & F  & G  & H  & I  & J  & K  & L  & M  & N  & O  & P  & Q  & R  & S  \\ \hline
 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 & 32 & 33 \\ \hline
 \end{tabular}
-\\
+
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
 \hline
 T  & U  & V  & X  & Y  & Z  & 1  & 2  & 3  & 4  & 5  & 6  & 7  & 8  & 9  & - \\ \hline
@@ -188,6 +188,36 @@ T  & U  & V  & X  & Y  & Z  & 1  & 2  & 3  & 4  & 5  & 6  & 7  & 8  & 9  & - \\ 
 Utilizando a tabela, subtituímos as letras pelos números, ignorando os acentos e letras maíusculas. O número 49 irá ser utilizado para substituir os espaços.
 
 O uso de 2 digitos para representar cada letra, evita a ambiguidade. Por exemplo, se a letra A fosse representada pelo número 3 e a letra B pelo número 4, logo "AB" seria representado por 34, porém o número 7 também seria representado por 34.
+
+\subsection{Como o DES criptografa uma mensagem?}
+
+Imagine que temos um texto simples de 64 bit. Essa mensagem vai ser colocada (input) num bloco de cifra do DES que vai mostrar (output) uma mensagem criptografada. A decriptação vai ser realizada utilizando o mesmo algoritmo da encriptação, trocando apenas as ordens das chaves. Veja:\\
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics{encriptando_descriptando}
+	\caption{Encriptando e descriptando com DES}
+	\label{encriptando_descriptando_des}
+\end{figure}
+
+\subsection{Fluxo do algoritmo}
+
+O esquema geral para criptografia DES está ilustrado na figura abaixo.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[scale=0.5]{esquema_geral}
+	\caption{Encriptando com DES.}
+	\label{esquema_geral_des}
+\end{figure}
+
+Assim como em qualquer esquema de criptografia, existem duas entradas na função de criptografia: O texto claro a ser codificado e a chave. Nesse caso, o texto precisa ter 64 bits de extensão e a chave tem 56 bits de extensão (na realidade, a função espera uma chave de 64 bits como entrada. Porém, somente 56 desses bits serão utilizados; os outros 8 bits podem ser usados como bits de paridade ou simplesmente definidos arbitrariamente).
+
+Examinando de baixo da figura, podemos ver que o processamento do texto claro prossegue em três fases. Primeiro, o texto claro de 64 bits passa por uma permutação inicial, que reorganiza os bits para produzir a entrada permutada. Isso é seguido por uma fase consistindo em 16 rodadas da mesma função, que envolvem funções de permutação e substituição. A saída da última (décima sexta) rodada consiste em 64 bits que são uma função do texto claro de entrada e da chave. As metades da esquerda e da direita e da saída são trocadas para produzir a pré-saída. Finalmente, a pré-saída é passada por uma permutação (IP-¹) que é o inverso da função de permutação inicial (ou seja, ele executa o mesmo algoritmo, porém, executando da última chave para a primeira), o DES tem a estrutura exata e uma cifra de Feistel.
+
+A chave de 56 bits é utilizada da seguinte forma: Inicialmente, a chave é passada por uma função de permutação. Depois, para cada uma das 16 rodadas, uma subchave é produzida pela combinação de um deslocamento circular à esquerda e uma permutação. A função de permutação é a mesma para cada rodada, mas uma subchave diferente é produzida, devido aos deslocamentos repetidos dos bits da chave.
+
+Permutação inicial - A permutação inicial e seu inverso são definidos por tabelas, como mostram as tabelas abaixo, respectivamente. As tabelas devem ser interpretadas da seguinte maneira. A entrada de uma tabela consiste em 64 bits numerados de 1 a 64. As 64 entradas na tabela de permutação contêm uma permutação dos números de 1 a 64. Cada entrada na tabela de permutação indica a posição de um bit de entrada numerado na saída, que também consiste em 64 bits. Para ver que essas duas funções de permutação são realmente o inverso uma da outra, considere a seguinte entrada M de 64 bits:
 
 % Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
 \bookmarksetup{startatroot}
@@ -214,10 +244,10 @@ Conclusão
    Abstract
 
    \vspace{\onelineskip}
- 
+
    \noindent
    \textbf{Keywords}: des. Data Encryption Standard. criptografia. ifsp.
- \end{otherlanguage*}  
+ \end{otherlanguage*}
 \end{resumoumacoluna}
 
 % Referências bibliográficas
